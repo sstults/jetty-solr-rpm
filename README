@@ -1,3 +1,5 @@
 RPM build for Solr using builtin Jetty
 
 Solr version 4.1.0
+
+adapted from https://github.com/jfroche/solr-rpm

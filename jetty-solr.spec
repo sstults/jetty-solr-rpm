@@ -4,7 +4,7 @@
 
 Name:		jetty-solr
 Version:	%{ver}
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Solr
 License:	GPL
 URL:		http://lucene.apache.org/solr/
@@ -33,15 +33,15 @@ cp -pr contrib "%{buildroot}%{_prefix}"
 cp -pr dist "%{buildroot}%{_prefix}"
 cp -pr docs "%{buildroot}%{_prefix}"
 %__install -d "%{buildroot}%{_prefix}/jetty-solr"
-cp -pr example/solr/* "%{buildroot}%{_prefix}/jetty-solr"
+cp -pr example/* "%{buildroot}%{_prefix}/jetty-solr"
 cp -pr licenses "%{buildroot}%{_prefix}"
-%__install -d "%{buildroot}%{_prefix}"/jetty-solr/data
-%__install -d "%{buildroot}%{_prefix}"/jetty-solr/lib
+%__install -d "%{buildroot}%{_prefix}"/jetty-solr/solr/data
+%__install -d "%{buildroot}%{_prefix}"/jetty-solr/solr/lib
 %__install -d "%{buildroot}"/etc/default
 %__install -d "%{buildroot}"/etc/init.d
 %__install -D -m0644  "%{SOURCE1}" %{buildroot}/etc/default/jetty
 %__install -D -m0755  "%{SOURCE2}" %{buildroot}/etc/init.d/jetty-solr
-%__install -D -m0644  "%{SOURCE3}" %{buildroot}%{_prefix}/jetty-solr/etc
+%__install -D -m0644  "%{SOURCE3}" %{buildroot}%{_prefix}/jetty-solr/etc/jetty-logging.xml
 sed -i "s|JETTY_HOME_REPLACE|%{_prefix}|g" "%{buildroot}/etc/default/jetty"
 sed -i "s|JETTY_LOG_REPLACE|%{_logprefix}|g" "%{buildroot}/etc/default/jetty"
 sed -i "s|JAVA_HOME_REPLACE|%{_javaprefix}|g" "%{buildroot}/etc/default/jetty"
@@ -69,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) /etc/default/jetty
 
 %changelog
-* Thu Jan 28 2013 Boogie Shafer <boogieshafer@yahoo.com>
+* Tue Jan 29 2013 Boogie Shafer <boogieshafer@yahoo.com>
 - edits for 4.1.0 solr using bundled jetty and zookeeper
 
 * Tue Jan 18 2012 Jean-Francois Roche <jfroche@affinitic.be>

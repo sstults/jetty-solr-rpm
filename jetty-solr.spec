@@ -13,12 +13,11 @@ Source1:        jetty
 Source2:        jetty-solr
 Source3:        jetty-logging.xml
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
-Requires:	/usr/sbin/groupadd /usr/sbin/useradd
+Requires(pre):	shadow-utils
 Requires:	java => 1:1.6.0
 
 %description
 %{summary}
-%
 %prep
 %setup -q -n solr-%{version}
 
@@ -67,6 +66,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/SYSTEM_REQUIREMENTS.txt
 %attr(0755,root,root) /etc/init.d/jetty-solr
 %attr(0644,root,root) /etc/default/jetty
+
+%pre
+getent group solr >/dev/null || groupadd -r solr
+getent passwd solr >/dev/null || \
+    useradd -r -g solr -d %{_prefix} -s /sbin/nologin \
+    -c "Solr User" solr
+exit 0
+
+%post
+echo "Installation complete."
 
 %changelog
 * Tue Jan 29 2013 Boogie Shafer <boogieshafer@yahoo.com>

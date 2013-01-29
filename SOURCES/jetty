@@ -14,7 +14,7 @@ JAVA_OPTIONS="-Djava.util.logging.config.file=etc/logging.properties $JAVA_OPTIO
 # SOLR settings for jetty-solr
 SOLRBOOTCONFDIR=$JETTY_HOME/solr/collection1/conf
 SOLRCONFNAME=exampleconf
-SOLRNUMSHARDS=2
+SOLRNUMSHARDS=1
 
 # edit for zookeeper server info
 ZOOKEEPER01=fookeeper01.domain.com:2181

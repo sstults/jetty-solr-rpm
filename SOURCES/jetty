@@ -3,30 +3,30 @@ JETTY_HOME=JETTY_HOME_REPLACE/jetty-solr
 JETTY_USER=solr
 JETTY_LOGS=JETTY_LOGS_REPLACE
 JETTY_PORT=8983
+JETTY_ARGS="--pre=etc/jetty-logging.xml $JETTY_ARGS"
 
 # JAVA settings for jetty-solr
 JAVA_HOME=JAVA_HOME_REPLACE/java
 JAVA_OPTIONS="-Dsolr.solr.home=$JETTY_HOME/solr $JAVA_OPTIONS"
-JAVA_OPTIONS="--pre=etc/jetty-logging.xml $JAVA_OPTIONS"
 JAVA_OPTIONS="-Djava.util.logging.config.file=etc/logging.properties $JAVA_OPTIONS"
 
 
 # SOLR settings for jetty-solr
 SOLRBOOTCONFDIR=$JETTY_HOME/solr/collection1/conf
 SOLRCONFNAME=exampleconf
-SOLRNUMSHARDS=1
+SOLRNUMSHARDS=2
 
 # edit for zookeeper server info
 ZOOKEEPER01=fookeeper01.domain.com:2181
 ZOOKEEPER02=fookeeper02.domain.com:2181
 ZOOKEEPER03=fookeeper03.domain.com:2181
 
-# bootstrapping a local, single zookeeper configuration
-JAVA_OPTIONS="-Dbootstrap_confdir=$SOLRBOOTCONFDIR -Dcollection.configName=$SOLRCONFNAME -DzkRun -DnumShards=$SOLRNUMSHARDS $JAVA_OPTIONS"
+# uncomment to bootstrap
+JAVA_OPTIONS="-Dbootstrap_confdir=$SOLRBOOTCONFDIR -Dcollection.configName=$SOLRCONFNAME -DnumShards=$SOLRNUMSHARDS $JAVA_OPTIONS"
 
-# bootstrapping a zookeeper ensemble configuration
-# JAVA_OPTIONS="-Dbootstrap_confdir=$SOLRBOOTCONFDIR -Dcollection.configName=$SOLRCONFNAME -DzkHost=$ZOOKEEPER01,$ZOOKEEPER02,$ZOOKEEPER03 -DnumShards=$SOLRNUMSHARDS $JAVA_OPTIONS"
+# enable local zookeeper (non-ensemble)
+JAVA_OPTIONS="-DzkRun $JAVA_OPTIONS"
 
-# normal startup example with zookeeper ensemble
+# or, use remote zookeeper ensemble
 # JAVA_OPTIONS="-DzkHost=$ZOOKEEPER01,$ZOOKEEPER02,$ZOOKEEPER03 $JAVA_OPTIONS"
 

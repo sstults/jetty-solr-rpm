@@ -1,0 +1,10 @@
+TODO items for rpm packaging
+
+-resolve issues with logging and filenaming
+    jetty request log
+    jetty stderr
+    solr log
+    zookeeper logs when using built in zk
+
+-confirm log rotation working for all logs
+

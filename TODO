@@ -8,3 +8,4 @@ TODO items for rpm packaging
 
 -confirm log rotation working for all logs
 
+-postinstall logic to pick appropriate jvm

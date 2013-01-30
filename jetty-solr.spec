@@ -4,7 +4,7 @@
 
 Name:			jetty-solr
 Version:		%{ver}
-Release:		8%{?dist}
+Release:		9%{?dist}
 Summary:		Solr
 License:		GPL
 URL:			http://lucene.apache.org/solr/
@@ -88,7 +88,7 @@ echo "Installation complete."
 
 %preun
 if [ $1 = 0 ] ; then
-   service jetty-solr stop >/dev/null 2>&1
+   service jetty-solr stop >/dev/null 2>&1 || :
    chkconfig --del jetty-solr
 fi
 

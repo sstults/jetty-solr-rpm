@@ -4,7 +4,7 @@
 
 Name:			jetty-solr
 Version:		%{ver}
-Release:		6%{?dist}
+Release:		8%{?dist}
 Summary:		Solr
 License:		GPL
 URL:			http://lucene.apache.org/solr/
@@ -18,7 +18,7 @@ Requires(post):		chkconfig
 Requires(preun):	chkconfig
 Requires(preun):	initscripts
 Requires(postun):	initscripts
-Requires:		java => 1:1.6.0
+Requires:		java => 1:1.7.0
 
 %description
 %{summary}
@@ -49,6 +49,8 @@ cp -pr licenses "%{buildroot}%{_prefix}"
 sed -i "s|JETTY_HOME_REPLACE|%{_prefix}|g" "%{buildroot}/etc/default/jetty"
 sed -i "s|JETTY_LOGS_REPLACE|%{_logprefix}|g" "%{buildroot}/etc/default/jetty"
 sed -i "s|JAVA_HOME_REPLACE|%{_javaprefix}|g" "%{buildroot}/etc/default/jetty"
+sed -i "s|./logs/|%{_logprefix}|g" "%{buildroot}%{_prefix}/jetty-solr/etc/logging.properties"
+sed -i "s|logs/|%{_logprefix}|g" "%{buildroot}%{_prefix}/jetty-solr/etc/jetty.xml"
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -92,7 +94,7 @@ fi
 
 %postun
 if [ "$1" -ge "1" ] ; then
-   service jetty-solr condrestart >/dev/null 2>&1 || :
+   service jetty-solr restart >/dev/null 2>&1 || :
 fi
 
 %changelog

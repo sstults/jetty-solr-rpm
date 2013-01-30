@@ -3,7 +3,7 @@ JETTY_HOME=JETTY_HOME_REPLACE/jetty-solr
 JETTY_USER=solr
 JETTY_LOGS=JETTY_LOGS_REPLACE
 JETTY_PORT=8983
-JETTY_ARGS="--pre=etc/jetty-logging.xml $JETTY_ARGS"
+JETTY_ARGS="-pre=etc/jetty-logging.xml $JETTY_ARGS"
 
 # JAVA settings for jetty-solr
 JAVA_HOME=JAVA_HOME_REPLACE/java
@@ -14,7 +14,7 @@ JAVA_OPTIONS="-Djava.util.logging.config.file=etc/logging.properties $JAVA_OPTIO
 # SOLR settings for jetty-solr
 SOLRBOOTCONFDIR=$JETTY_HOME/solr/collection1/conf
 SOLRCONFNAME=exampleconf
-SOLRNUMSHARDS=2
+SOLRNUMSHARDS=1
 
 # edit for zookeeper server info
 ZOOKEEPER01=fookeeper01.domain.com:2181
